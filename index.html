@@ -74,7 +74,7 @@
 
   /* 소개 */
   .intro { padding: 88px 0 96px; }
-  .intro p { margin: 0 0 1.1em; max-width: 42em; word-break: keep-all; font-size: clamp(1.15rem, 2.3vw, 1.45rem); line-height: 1.65; font-weight: 500; letter-spacing: -0.01em; }
+  .intro p { margin: 0 0 1.1em; max-width: none; word-break: keep-all; font-size: clamp(1.15rem, 2.3vw, 1.45rem); line-height: 1.65; font-weight: 500; letter-spacing: -0.01em; }
   .intro p:last-child { margin-bottom: 0; }
 
   /* 멤버 */
@@ -120,6 +120,7 @@
   @media (max-width: 720px) {
     .hero { min-height: 76vh; }
     .intro { padding: 56px 0 64px; }
+    .pc { display: none; }
     .members { padding-bottom: 72px; }
     .person { grid-template-columns: 1fr; padding: 22px 8px; gap: 6px; }
     .contact { padding-top: 48px; }
@@ -168,8 +169,10 @@
 <main>
   <section class="intro" aria-label="소개">
     <div class="wrap">
-      <p>BLUEPRINTERS는 로보틱스 기술과 비즈니스가 만나는 지점을 함께 보는 커뮤니티입니다. 로봇 관련 공학 석·박사 연구자와 현업 엔지니어가 모여 있습니다.</p>
-      <p>기술이 현장과 시장에 닿기까지의 과정에 관심을 가져온 사람들이 모였습니다. 배우고 이야기 나누는 데서 그치지 않고, 함께 시도할 수 있는 일을 만들어 가려 합니다.</p>
+      <p>BLUEPRINTERS는 로보틱스 기술과 비즈니스가 만나는 지점을 함께 보는 커뮤니티로,<br class="pc">
+      로보틱스 관련 공학 석·박사 연구자와 현업 엔지니어로 구성되어 있습니다.</p>
+      <p>기술이 현장과 시장에 닿기까지의 과정에 관심을 가져온 사람들이 모였습니다.<br class="pc">
+      배우고 이야기 나누는 데서 그치지 않고, 함께 시도할 수 있는 일을 만들어 가려 합니다.</p>
     </div>
   </section>
 
