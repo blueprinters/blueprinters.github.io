@@ -77,6 +77,20 @@
   .intro p { margin: 0 0 1.1em; max-width: none; word-break: keep-all; font-size: clamp(1.15rem, 2.3vw, 1.45rem); line-height: 1.65; font-weight: 500; letter-spacing: -0.01em; }
   .intro p:last-child { margin-bottom: 0; }
 
+  /* 할 수 있는 일 */
+  .what { padding: 0 0 96px; }
+  .what h2 { margin: 0 0 24px; font-size: 1.8rem; font-weight: 800; }
+  .cards { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; border-top: 3px solid var(--ink); padding-top: 32px; }
+  .card { display: flex; flex-direction: column; gap: 14px; }
+  .card .thumb { margin-bottom: -4px; aspect-ratio: 4 / 3; background: #fff; border: 1px solid rgba(13, 27, 62, 0.14); overflow: hidden; }
+  .card .thumb img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .card h3 { margin: 0; font-size: 1.15rem; font-weight: 800; letter-spacing: -0.02em; line-height: 1.3; }
+  .card .desc { margin: -6px 0 0; font-size: 0.95rem; line-height: 1.5; color: var(--muted); }
+
+  /* 키워드 칩 */
+  .chips { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+  .chips li { padding: 2px 10px; border: 1px solid currentColor; border-radius: 999px; font-size: 0.82rem; font-weight: 600; line-height: 1.6; white-space: nowrap; }
+
   /* 멤버 */
   .members { padding: 0 0 104px; }
   .members h2 { margin: 0 0 24px; font-size: 1.8rem; font-weight: 800; }
@@ -95,9 +109,13 @@
   .person:hover, .person:focus-visible { background: var(--blue); color: #fff; }
   .person:focus-visible { outline-color: var(--ink); outline-offset: -3px; }
   .person .name { font-size: clamp(1.15rem, 2.4vw, 1.6rem); font-weight: 800; letter-spacing: -0.02em; line-height: 1.2; }
+  .person .info { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
   .person .bio { font-size: 1.02rem; line-height: 1.55; color: var(--muted); }
+  .person .chips { color: var(--ink); }
+  .person .chips li { font-weight: 500; }
   .person .go { font-weight: 700; text-decoration: underline; text-underline-offset: 4px; white-space: nowrap; }
   .person:hover .bio, .person:focus-visible .bio { color: rgba(255, 255, 255, 0.86); }
+  .person:hover .chips, .person:focus-visible .chips { color: rgba(255, 255, 255, 0.9); }
 
   /* 연락 */
   .contact { background: var(--blue); color: #fff; padding: 64px 0 28px; }
@@ -117,7 +135,14 @@
   .contact .mail:hover { background: #fff; color: var(--blue); text-decoration-color: transparent; }
   .fine { margin-top: 56px; font-size: 0.86rem; color: rgba(255, 255, 255, 0.75); }
 
+  @media (max-width: 1000px) {
+    .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 560px) {
+    .cards { grid-template-columns: 1fr; }
+  }
   @media (max-width: 720px) {
+    .what { padding-bottom: 64px; }
     .hero { min-height: 76vh; }
     .intro { padding: 56px 0 64px; }
     .pc { display: none; }
@@ -176,40 +201,17 @@
     </div>
   </section>
 
+  <section class="what" aria-labelledby="what-h">
+    <div class="wrap">
+      <h2 id="what-h">WHAT WE DO</h2>
+      <ul class="cards" id="cards"></ul>
+    </div>
+  </section>
+
   <section class="members" aria-labelledby="members-h">
     <div class="wrap">
       <h2 id="members-h">MEMBERS</h2>
-      <div class="list">
-        <div class="person">
-          <span class="name">김유신</span>
-          <span class="bio">Robotics Researcher | Undergraduate Electrical & Computer Engineering</span>
-          <a class="go" href="https://www.linkedin.com/in/yusin-kim" target="_blank" rel="noopener">LinkedIn</a>
-        </div>
-
-        <div class="person">
-          <span class="name">김정남</span>
-          <span class="bio">Robotics Mechanism Researcher | MS. Mechanical Engineering</span>
-          <a class="go" href="https://www.linkedin.com/in/jeongnam-‍kim-205a59232" target="_blank" rel="noopener">LinkedIn</a>
-        </div>
-
-        <div class="person">  
-          <span class="name">박정기</span>
-          <span class="bio">Sensor Signal Processing Engineer | PhD. Electrical Engineering</span>
-          <a class="go" href="https://www.linkedin.com/in/jeong-ki-park-532267239" target="_blank" rel="noopener">LinkedIn</a>
-        </div>
-
-        <div class="person">  
-          <span class="name">배성훈</span>
-          <span class="bio">Robotics Researcher & CEO | Ph.D Candidate Mechanical Engineering</span>
-          <a class="go" href="https://www.linkedin.com/in/sunghoon-bae-691832279" target="_blank" rel="noopener">LinkedIn</a>
-        </div>
-
-        <div class="person">          
-          <span class="name">이승엽</span>
-          <span class="bio">Hardware Engineer | MS. Mechanical Engineering</span>
-          <a class="go" href="https://www.linkedin.com/in/seungyeop-lee-1b4663252" target="_blank" rel="noopener">LinkedIn</a>
-        </div>
-      </div>
+      <div class="list" id="member-list"></div>
     </div>
   </section>
 </main>
@@ -223,6 +225,87 @@
 </footer>
 
 <script>
+  // ───── 콘텐츠 데이터 ─────
+  // 할 수 있는 일 카드: image에 경로를 넣으면 4:3 영역에 이미지가 채워지고,
+  // description에 문장을 넣으면 역량명 아래에 표시됩니다. 비워 두면 표시되지 않습니다.
+  var CAPABILITIES = [
+    { title: '기구 설계·제작',  image: '', description: '', keywords: ['그리퍼', '지그', '시제품'] },
+    { title: '센서·신호처리',   image: '', description: '', keywords: ['비전', '힘·촉각', '검사'] },
+    { title: '로봇 제어·AI',    image: '', description: '', keywords: ['협동로봇', '모방학습', '제어'] },
+    { title: '시스템 통합',     image: '', description: '', keywords: ['전장', '통합', '현장 시험'] }
+  ];
+
+  // 멤버: keywords는 직함 아래 칩으로 표시됩니다. (김유신 외에는 임시 값)
+  var MEMBERS = [
+    { name: '김유신', bio: 'Robotics Researcher | Undergraduate Electrical & Computer Engineering',
+      url: 'https://www.linkedin.com/in/yusin-kim',
+      keywords: ['기구 설계', '사업 개발', '로봇 제어'] },
+    { name: '김정남', bio: 'Robotics Mechanism Researcher | MS. Mechanical Engineering',
+      url: 'https://www.linkedin.com/in/jeongnam-kim-205a59232',
+      keywords: ['기구 설계', '그리퍼 설계', '시제품 제작'] },
+    { name: '박정기', bio: 'Sensor Signal Processing Engineer | PhD. Electrical Engineering',
+      url: 'https://www.linkedin.com/in/jeong-ki-park-532267239',
+      keywords: ['신호처리', '센서 설계', '데이터 분석'] },
+    { name: '배성훈', bio: 'Robotics Researcher & CEO | Ph.D Candidate Mechanical Engineering',
+      url: 'https://www.linkedin.com/in/sunghoon-bae-691832279',
+      keywords: ['로봇 학습', '로봇 제어', '시스템 통합'] },
+    { name: '이승엽', bio: 'Hardware Engineer | MS. Mechanical Engineering',
+      url: 'https://www.linkedin.com/in/seungyeop-lee-1b4663252',
+      keywords: ['하드웨어 설계', '전장', '시제품 제작'] }
+  ];
+
+  // ───── 렌더링 ─────
+  function el(tag, cls, text) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text) n.textContent = text;
+    return n;
+  }
+  function chips(list) {
+    var ul = el('ul', 'chips');
+    ul.setAttribute('aria-label', '키워드');
+    (list || []).forEach(function (k) { ul.appendChild(el('li', '', k)); });
+    return ul;
+  }
+
+  var cards = document.getElementById('cards');
+  if (cards) {
+    CAPABILITIES.forEach(function (c) {
+      var li = el('li', 'card');
+      var thumb = el('div', 'thumb');
+      if (c.image) {
+        var img = el('img');
+        img.src = c.image;
+        img.alt = '';
+        img.loading = 'lazy';
+        thumb.appendChild(img);
+      }
+      li.appendChild(thumb);
+      li.appendChild(el('h3', '', c.title));
+      if (c.description) li.appendChild(el('p', 'desc', c.description));
+      li.appendChild(chips(c.keywords));
+      cards.appendChild(li);
+    });
+  }
+
+  var list = document.getElementById('member-list');
+  if (list) {
+    MEMBERS.forEach(function (m) {
+      var row = el('div', 'person');
+      var info = el('div', 'info');
+      info.appendChild(el('span', 'bio', m.bio));
+      info.appendChild(chips(m.keywords));
+      var a = el('a', 'go', 'LinkedIn');
+      a.href = m.url;
+      a.target = '_blank';
+      a.rel = 'noopener';
+      row.appendChild(el('span', 'name', m.name));
+      row.appendChild(info);
+      row.appendChild(a);
+      list.appendChild(row);
+    });
+  }
+
   // 워드마크를 누르면 글자가 다시 조립됩니다.
   (function () {
     var mark = document.getElementById('wordmark');
