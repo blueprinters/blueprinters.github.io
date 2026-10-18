@@ -85,6 +85,7 @@
   .card .thumb { margin-bottom: -4px; aspect-ratio: 4 / 3; background: #fff; border: 1px solid rgba(13, 27, 62, 0.14); overflow: hidden; }
   .card .thumb img { display: block; width: 100%; height: 100%; object-fit: cover; }
   .card h3 { margin: 0; font-size: 1.15rem; font-weight: 800; letter-spacing: -0.02em; line-height: 1.3; }
+  .card .chips { margin-top: auto; }
   .card .desc { margin: -6px 0 0; font-size: 0.95rem; line-height: 1.5; color: var(--muted); }
 
   /* 키워드 칩 */
@@ -231,10 +232,18 @@
   // 할 수 있는 일 카드: image에 경로를 넣으면 4:3 영역에 이미지가 채워지고,
   // description에 문장을 넣으면 역량명 아래에 표시됩니다. 비워 두면 표시되지 않습니다.
   var CAPABILITIES = [
-    { title: '기구 설계·제작',  image: '', description: '', keywords: ['그리퍼', '지그', '시제품'] },
-    { title: '센서·신호처리',   image: '', description: '', keywords: ['비전', '힘·촉각', '검사'] },
-    { title: '로봇 제어·AI',    image: '', description: '', keywords: ['협동로봇', '모방학습', '제어'] },
-    { title: '시스템 통합',     image: '', description: '', keywords: ['전장', '통합', '현장 시험'] }
+    { title: '지능형 로봇 하드웨어 설계', image: 'assets/what-1.jpg',
+      description: '액추에이터와 센서 같은 핵심 부품부터 다관절 산업용 로봇까지, 요구 조건에 맞는 기구를 직접 설계합니다. 구동 방식과 구조를 함께 따져 현장에서 쓸 수 있는 하드웨어를 만듭니다.',
+      keywords: ['액추에이터 설계', '센서 설계', '다관절 로봇', '웨어러블 로봇'] },
+    { title: '레이더·비전 센싱', image: 'assets/what-2.jpg',
+      description: '레이더와 비전 센서로 거리와 속도, 주변 환경을 읽어 냅니다. 잡음이 많은 측정 데이터에서 필요한 정보를 골라내고, 로봇과 현장의 문제를 이해하는 데 활용합니다.',
+      keywords: ['신호처리', '센서 데이터 분석', '3D 환경 재구축'] },
+    { title: '시뮬레이션 기반 로봇 학습', image: 'assets/what-3.jpg',
+      description: '모방학습과 강화학습으로 로봇 동작을 데이터에서 배우게 하고, 실제 환경을 시뮬레이션으로 옮겨(Real2Sim) 미리 검증합니다. 시뮬레이션에서 익힌 결과를 현장 로봇에 적용하는 Sim2Real까지 다룹니다.',
+      keywords: ['모방학습', '강화학습', 'Real2Sim·Sim2Real', '시뮬레이션 경량화'] },
+    { title: '현장 데이터 자동화', image: 'assets/what-4.jpg',
+      description: '현장 곳곳에 흩어진 센서와 설비 데이터를 모아 DB로 정리하고, 자동화와 시각화로 이어지는 하나의 시스템으로 만듭니다. 기술 검토부터 구축까지 맡아, 현장에서 바로 쓸 수 있는 형태로 넘깁니다.',
+      keywords: ['데이터 수집·DB화', '업무 자동화', '시각화', '시스템 통합'] }
   ];
 
   // 멤버: role(직함) / degree·school(학력·소속, 둘째 줄) / keywords(칩)입니다. (김유신 외에는 임시 값)
@@ -244,7 +253,7 @@
       keywords: ['로봇 모방·강화학습', '데이터 기반 로봇 제어', '딥테크 기술사업화'] },
     { name: '김정남', role: 'Robotics Mechanism Researcher', school: 'Seoul National University', degree: 'M.S. Mechanical Engineering',
       url: 'https://www.linkedin.com/in/jeongnam-kim-205a59232',
-      keywords: ['로봇 메커니즘 설계', '액추에이터·센서 설계', '데이터 분석·자동화'] },
+      keywords: ['로봇 메커니즘 설계', '액추에이터·센서 설계', '다관절 로봇 제어', '데이터 분석·자동화'] },
     { name: '박정기', role: 'Sensor Signal Processing Engineer', school: 'POSTECH', degree: 'Ph.D. Electrical Engineering',
       url: 'https://www.linkedin.com/in/jeong-ki-park-532267239',
       keywords: ['레이더 센싱', '잡음 환경 신호처리', '센서 데이터 해석'] },
