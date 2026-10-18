@@ -110,11 +110,13 @@
   .person:focus-visible { outline-color: var(--ink); outline-offset: -3px; }
   .person .name { font-size: clamp(1.15rem, 2.4vw, 1.6rem); font-weight: 800; letter-spacing: -0.02em; line-height: 1.2; }
   .person .info { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
-  .person .bio { font-size: 1.02rem; line-height: 1.55; color: var(--muted); }
+  .person .bio { font-size: 1.02rem; line-height: 1.55; font-weight: 600; color: var(--ink); }
+  .person .edu { margin-top: -6px; font-size: 0.92rem; line-height: 1.5; color: var(--muted); }
   .person .chips { color: var(--ink); }
   .person .chips li { font-weight: 500; }
   .person .go { font-weight: 700; text-decoration: underline; text-underline-offset: 4px; white-space: nowrap; }
-  .person:hover .bio, .person:focus-visible .bio { color: rgba(255, 255, 255, 0.86); }
+  .person:hover .bio, .person:focus-visible .bio { color: #fff; }
+  .person:hover .edu, .person:focus-visible .edu { color: rgba(255, 255, 255, 0.86); }
   .person:hover .chips, .person:focus-visible .chips { color: rgba(255, 255, 255, 0.9); }
 
   /* 연락 */
@@ -235,21 +237,21 @@
     { title: '시스템 통합',     image: '', description: '', keywords: ['전장', '통합', '현장 시험'] }
   ];
 
-  // 멤버: keywords는 직함 아래 칩으로 표시됩니다. (김유신 외에는 임시 값)
+  // 멤버: role(직함) / degree·school(학력·소속, 둘째 줄) / keywords(칩)입니다. (김유신 외에는 임시 값)
   var MEMBERS = [
-    { name: '김유신', bio: 'Robotics Researcher | Undergraduate Electrical & Computer Engineering',
+    { name: '김유신', role: 'Robotics Researcher', school: 'Seoul National University', degree: 'B.S. Candidate Electrical & Computer Engineering',
       url: 'https://www.linkedin.com/in/yusin-kim',
       keywords: ['로봇 모방·강화학습', '데이터 기반 로봇 제어', '딥테크 기술사업화'] },
-    { name: '김정남', bio: 'Robotics Mechanism Researcher | MS. Mechanical Engineering',
+    { name: '김정남', role: 'Robotics Mechanism Researcher', school: 'Seoul National University', degree: 'M.S. Mechanical Engineering',
       url: 'https://www.linkedin.com/in/jeongnam-kim-205a59232',
       keywords: ['로봇 메커니즘 설계', '액추에이터·센서 설계', '데이터 분석·자동화'] },
-    { name: '박정기', bio: 'Sensor Signal Processing Engineer | PhD. Electrical Engineering',
+    { name: '박정기', role: 'Sensor Signal Processing Engineer', school: 'POSTECH', degree: 'Ph.D. Electrical Engineering',
       url: 'https://www.linkedin.com/in/jeong-ki-park-532267239',
       keywords: ['레이더 센싱', '잡음 환경 신호처리', '센서 데이터 해석'] },
-    { name: '배성훈', bio: 'RORO Labs CEO | Ph.D Candidate Mechanical Engineering',
+    { name: '배성훈', role: 'RORO Labs CEO', school: 'Seoul National University', degree: 'Ph.D. Candidate Mechanical Engineering',
       url: 'https://www.linkedin.com/in/sunghoon-bae-691832279',
       keywords: ['Real2Sim 에셋 제작', '3D 비전·환경 재구축', '시뮬레이션 경량화', '시스템 통합'] },
-    { name: '이승엽', bio: 'Hardware Engineer | MS. Mechanical Engineering',
+    { name: '이승엽', role: 'Hardware Engineer', school: 'Korea University', degree: 'M.S. Mechanical Engineering',
       url: 'https://www.linkedin.com/in/seungyeop-lee-1b4663252',
       keywords: ['카메라·비전 데이터 처리', '웨어러블 로봇 하드웨어', '전장·시제품 제작'] }
   ];
@@ -293,7 +295,8 @@
     MEMBERS.forEach(function (m) {
       var row = el('div', 'person');
       var info = el('div', 'info');
-      info.appendChild(el('span', 'bio', m.bio));
+      info.appendChild(el('span', 'bio', m.role));
+      info.appendChild(el('span', 'edu', m.degree + ', ' + m.school));
       info.appendChild(chips(m.keywords));
       var a = el('a', 'go', 'LinkedIn');
       a.href = m.url;
