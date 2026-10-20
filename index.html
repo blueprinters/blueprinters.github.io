@@ -38,7 +38,6 @@
     position: relative;
     background: var(--blue);
     color: #fff;
-    min-height: 60vh;
     display: flex;
     align-items: flex-end;
     overflow: hidden;
@@ -46,7 +45,7 @@
   .lines { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
   .lines * { fill: none; stroke: rgba(255, 255, 255, 0.22); stroke-width: 1; vector-effect: non-scaling-stroke; }
   .lines .dash { stroke-dasharray: 5 5; }
-  .hero .wrap { position: relative; width: 100%; padding-top: 72px; padding-bottom: 52px; }
+  .hero .wrap { position: relative; width: 100%; padding-top: 64px; padding-bottom: 52px; }
   .wordmark {
     margin: 0;
     font-family: "Archivo", "Pretendard Variable", Pretendard, sans-serif;
@@ -146,7 +145,7 @@
   }
   @media (max-width: 720px) {
     .what { padding-bottom: 64px; }
-    .hero { min-height: 52vh; }
+    .hero .wrap { padding-top: 48px; }
     .intro { padding: 56px 0 64px; }
     .pc { display: none; }
     .members { padding-bottom: 72px; }
